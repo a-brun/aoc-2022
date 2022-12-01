@@ -1,20 +1,18 @@
 use std::fmt::Display;
 use std::time::Instant;
 
-use itertools::sorted;
+use itertools::Itertools;
 
 use aoc_2022::get_input_as_string;
 
 fn get_calories_of_biggest_snacks(input: &str, n: usize) -> u32 {
-    sorted(
-        input
-            .split("\n\n")
-            .map(|s| s.split("\n").map(|c| c.parse::<u32>().unwrap_or(0)).sum())
-            .collect::<Vec<u32>>(),
-    )
-    .rev()
-    .take(n)
-    .sum()
+    input
+        .split("\n\n")
+        .map(|s| s.split("\n").map(|c| c.parse::<u32>().unwrap_or(0)).sum::<u32>())
+        .sorted()
+        .rev()
+        .take(n)
+        .sum()
 }
 
 fn solve(input: &str) -> (impl Display, impl Display) {
