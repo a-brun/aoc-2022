@@ -3,7 +3,7 @@ use std::time::Instant;
 
 use aoc_2022::get_input_as_string;
 
-fn get_marker_position(input: &str, length: &usize) -> u32 {
+fn get_marker_position(input: &str, length: usize) -> usize {
     let elements = input.chars().collect::<Vec<char>>();
     let mut count = 0;
 
@@ -14,8 +14,8 @@ fn get_marker_position(input: &str, length: &usize) -> u32 {
             count = 0;
         }
 
-        if &count == length {
-            return u32::try_from(i + 1).unwrap();
+        if count == length {
+            return i + 1;
         }
     }
 
@@ -23,8 +23,8 @@ fn get_marker_position(input: &str, length: &usize) -> u32 {
 }
 
 fn solve(input: &str) -> (impl Display, impl Display) {
-    let p1 = get_marker_position(&input, &4);
-    let p2 = get_marker_position(&input, &14);
+    let p1 = get_marker_position(&input, 4);
+    let p2 = get_marker_position(&input, 14);
 
     (p1, p2)
 }
@@ -51,7 +51,7 @@ mod tests {
     fn test_p1() {
         let input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb";
 
-        let res = get_marker_position(&input, &4);
+        let res = get_marker_position(&input, 4);
 
         assert_eq!(7, res);
     }
@@ -60,7 +60,7 @@ mod tests {
     fn test_p2() {
         let input = "mjqjpqmgbljsphdztnvjfqwrcgsmlb";
 
-        let res = get_marker_position(&input, &14);
+        let res = get_marker_position(&input, 14);
 
         assert_eq!(19, res);
     }
